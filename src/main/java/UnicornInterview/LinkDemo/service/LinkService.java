@@ -37,13 +37,8 @@ public class LinkService {
     private LinkRepository linkRepository;
     private final RevisionRepository<LinkEntity, Long, Integer> revisionRepository;
 
-    private AuditReader auditReader;
-
     @PersistenceContext
     private EntityManager entityManager;
-
-
-
     public LinkService(LinkRepository linkRepository, RevisionRepository revisionRepository) {
         this.linkRepository = linkRepository;
         this.revisionRepository= revisionRepository;
@@ -85,9 +80,6 @@ public class LinkService {
         }).collect(Collectors.toList());
         return linkDTOS;
     }
-
-
-
     public LinkDTO saveLink(LinkDTO dto) {
 
         LinkEntity entity = new LinkEntity();
@@ -109,10 +101,6 @@ public class LinkService {
         LinkEntity savedEntity = linkRepository.save(existingEntity);
         return LinkFactory.fromEntity(savedEntity);
     }
-
-
-
-
     @Transactional
     public void deleteLink(Long id) {
         Optional<LinkEntity> linkEntityOptional = linkRepository.findById(id);
@@ -134,7 +122,6 @@ public class LinkService {
             return Optional.empty();
         }
     }
-
     public LinkDTO getLastChange(Long linkId) {
         Revision<Integer, LinkEntity> lastRevision = revisionRepository.findLastChangeRevision(linkId)
                 .orElseThrow(() -> new EntityNotFoundException("Link with ID " + linkId + " not found or no changes have been made."));
@@ -150,7 +137,6 @@ public class LinkService {
         LinkEntity penultimateRevisionEntity = revisions.get(revisions.size() - 2).getEntity();
         return LinkFactory.fromEntity(penultimateRevisionEntity);
     }
-
     public List<LinkChangeDTO> getAllLinkChanges() {
         AuditReader auditReader = AuditReaderFactory.get(entityManager);
         AuditQuery query = auditReader.createQuery().forRevisionsOfEntity(LinkEntity.class, false, true);
@@ -158,7 +144,6 @@ public class LinkService {
 
         return result.stream().map(this::mapRevisionToLinkChangeDTO).collect(Collectors.toList());
     }
-
     private LinkChangeDTO mapRevisionToLinkChangeDTO(Object[] tuple) {
         LinkEntity linkEntity = (LinkEntity) tuple[0];
         DefaultRevisionEntity revisionEntity = (DefaultRevisionEntity) tuple[1];
@@ -180,7 +165,6 @@ public class LinkService {
         dto.setRevisionType(revisionType.ordinal());
         return dto;
     }
-
     public List<LinkChangeDTO> getAllRevisionsForLink(Long linkId) {
         AuditReader auditReader = AuditReaderFactory.get(entityManager);
         AuditQuery query = auditReader.createQuery().forRevisionsOfEntity(LinkEntity.class, false, true);

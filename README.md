@@ -28,11 +28,17 @@ Projekt spustíte pomocí následujícího příkazu:
 ./mvnw spring-boot:run
 
 
-## Testování
-Pro spuštění testů využijte Maven:
+## Testování unit testy
+Pro spuštění unit testů využijte Maven:
 ./mvnw test
 
-##Swagger UI
+## Testování dat v aplikaci
+Pro otestování dat je za potřebí si spustit konzoli v dbeaveru nebo v PgAdminu a spustit insertData ze souboru data.sql který je pod složkou resources
+
+## Spuštění react aplikace v spring boot 
+V controller třídě bude zapotřebí povolit crossOrigin @CrossOrigin("http://localhost:3000") v uvozovkách pak změnit parametr localhostu na kterém bude běžet react aplikace
+
+## Swagger UI
 Pro zobrazení Swagger UI:
 http://localhost:8081/swagger-ui/index.html#/
 
