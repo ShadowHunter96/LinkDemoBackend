@@ -86,7 +86,7 @@ public class LinkController {
             @RequestParam("description") String description,
             @RequestParam("availableInFirefox") boolean availableInFirefox,
             @RequestParam("availableInChrome") boolean availableInChrome,
-            @RequestParam("isActive") boolean isActive,
+            @RequestParam("active") boolean active,
             @RequestParam("openInNewWindow") boolean openInNewWindow,
             @RequestPart(value = "image", required = false) MultipartFile image) throws IOException, SQLException {
 
@@ -100,7 +100,7 @@ public class LinkController {
         linkDTO.setDescription(description);
         linkDTO.setAvailableInFirefox(availableInFirefox);
         linkDTO.setAvailableInChrome(availableInChrome);
-        linkDTO.setActive(isActive);
+        linkDTO.setActive(active);
         linkDTO.setOpenInNewWindow(openInNewWindow);
 
         if (image != null && !image.isEmpty()) {
