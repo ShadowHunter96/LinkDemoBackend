@@ -1,7 +1,8 @@
 # Link Administration
 
 ## Popis
-Jedná se o demo funkcionalitu pro administraci entity Link 
+Popis a Cíl:
+Cílem je vytvořit robustní systém, který bude spravovat aplikační linky. Uživatelé budou moci přidávat, aktualizovat, mazat a prohlížet linky. Každý link bude obsahovat informace jako název, URL, obrázek, popis a dostupnost pro různé prohlížeče. Systém také umožní zobrazit linky v novém okně a sledovat historii změn.
 
 ## Instalace
 Po stažení z GitHub bude zapotřebí upravit konfiguraci pro připojení k databázi PostgreSQL. Nastavení se provádí v souboru `src/main/resources/application.properties`.  
